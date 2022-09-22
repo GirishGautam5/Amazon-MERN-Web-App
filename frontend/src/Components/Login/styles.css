@@ -1,0 +1,84 @@
+.Login{
+    background-color: white;
+    width: 40%;
+  min-width: 450px;
+  height: fit-content;
+  padding: 15px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Logo{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    width: 100px;
+    margin-right: auto;
+    margin-left: auto;
+}
+img{
+    width: 100%;
+}
+.Form-Container{
+    width: 55%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 20px;
+}
+.Form-Container > h1{
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.Form-Container > form >p {
+    margin-bottom: 5px;
+}
+.Form-Container > form > input{
+    height: 30px;
+    margin-bottom: 10px;
+    background-color: white;
+    width: 98%;
+}
+.Form-Container > form > input:focus{
+    outline: none !important;
+    box-shadow: 0 0 10px #719ECE;
+    border: 1px solid orange;
+}
+.Form-Container > p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+.login-Button{
+    background-color:  #f0c14b;
+    width: 100%;
+    border-radius: 2px;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid;
+    border-color: #a88734 #9c7e31 #846a29;
+}
+.Form-Container> p> span{
+    color: #426bc0;
+}
+.Form-Container> p{
+    font-size: 12px;
+    margin-top: 15px;
+    word-wrap: normal;
+    word-break: normal;
+}
+.signup-Button{
+    height: 30px;
+    width: 55%;
+    border-radius: 2px;
+    border: 1px solid;
+    border-color: darkgray;
+    margin-top: 20px;
+    font-size: 12px;
+}
+.signup-Button:hover{
+    background-color: #dfdfdf;
+    border: 1px solid gray;
+}
