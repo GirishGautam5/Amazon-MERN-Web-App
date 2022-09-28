@@ -22,7 +22,8 @@ export default function Login() {
         <form>
           <p>Email</p>
           <input
-            type="text"
+            type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
