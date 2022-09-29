@@ -4,7 +4,7 @@ import "./ProductCardstyles.css";
 import { useStateValue } from "../../ContextAPI/StateProvider";
 
 export default function ProductCard(props) {
-  const {image,title,price,rating} = props;
+  const {id,image,title,price,rating} = props;
   const [{basket}, dispatch] = useStateValue();
   console.log(basket,'basket')
   const addToCart=(e)=>{
@@ -12,6 +12,7 @@ export default function ProductCard(props) {
     dispatch({
       type: 'ADD_ITEM_TO_CART',
       item: {
+        id,
         title,
         price,
         image,

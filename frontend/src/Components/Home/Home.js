@@ -17,6 +17,7 @@ export default function Home() {
       </div>
       <div className="products_row">
         <ProductCard
+          id={1}
           image={
             "https://m.media-amazon.com/images/I/413u56t+CiL._AC_SY200_.jpg"
           }
@@ -25,27 +26,30 @@ export default function Home() {
           rating={4.5}
         />
         <ProductCard
+          id={2}
           image={
-            "https://m.media-amazon.com/images/I/413u56t+CiL._AC_SY200_.jpg"
+            "https://m.media-amazon.com/images/I/41CkKbseMGL._AC_SY200_.jpg"
           }
-          title={"One plus Nord"}
-          price={150000}
+          title={"Samsung S20"}
+          price={15000}
           rating={3}
         />
         <ProductCard
+          id={3}
           image={
-            "https://m.media-amazon.com/images/I/413u56t+CiL._AC_SY200_.jpg"
+            "https://m.media-amazon.com/images/I/41ZGJxnJu1S._AC_SY200_.jpg"
           }
-          title={"One plus Nord"}
-          price={200100}
+          title={"Samsung M32"}
+          price={12000}
           rating={3.5}
         />
         <ProductCard
+          id={4}
           image={
-            "https://m.media-amazon.com/images/I/413u56t+CiL._AC_SY200_.jpg"
+            "https://m.media-amazon.com/images/I/41d69zua5LL._AC_SY200_.jpg"
           }
-          title={"One plus Nord"}
-          price={21000}
+          title={"One plus Nord Smart Watch"}
+          price={20000}
           rating={2.5}
         />
       </div>
