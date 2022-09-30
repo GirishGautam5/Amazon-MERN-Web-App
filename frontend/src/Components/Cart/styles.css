@@ -35,6 +35,11 @@
 .product {
   display: flex;
   align-items: center;
+  padding-bottom: 15px;
+  padding-top: 5px;
+}
+.seperator{
+  border-bottom: 1px solid lightgray;
 }
 .product_img {
   flex: 0.3;

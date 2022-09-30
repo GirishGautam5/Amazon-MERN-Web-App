@@ -2,10 +2,12 @@ import React from "react";
 import { useStateValue } from "../../ContextAPI/StateProvider";
 import Navbar from "../Home/Navbar";
 import CurrencyFormat from "react-currency-format";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import { getTotalCartPrice } from "../../ContextAPI/Reducer";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const [{ basket }, dispatch] = useStateValue();
   console.log(basket, "basket");
   const removeItem=(e,id)=>{
@@ -22,6 +24,7 @@ export default function Cart() {
         <div className="shopping_cart">
           <h2>Shopping Cart</h2>
           {basket?.map((item) => (
+            <div>
             <div className="product">
               <div className="product_img">
                 <img src={item.image} alt="product" className="product_image" />
@@ -32,6 +35,8 @@ export default function Cart() {
                 <button onClick={(e)=>removeItem(e,item.id)}>Remove</button>
               </div>
             </div>
+            <div className="seperator" />
+            </div>
           ))}
         </div>
         <div className="subtotal">
@@ -39,7 +44,7 @@ export default function Cart() {
             renderText={(value) => (
               <>
                 <p>
-                  SubTotal ( {basket?.length} items) : <strong>{value}</strong>
+                  Subtotal ({basket?.length} items) : <strong>{value}</strong>
                 </p>
                 <small>
                   <input type="checkbox" />
@@ -51,9 +56,9 @@ export default function Cart() {
             value={getTotalCartPrice(basket)}
             displayType="text"
             thousandSeparator={true}
-            prefix={"₹ "}
+            prefix={"₹"}
           />
-          <button>Proceed to Checkout</button>
+          <button onClick={()=>navigate("/address")}>Proceed to Checkout</button>
         </div>
       </div>
     </div>
