@@ -43,12 +43,13 @@
     grid-auto-rows: 420px;
     grid-template-columns: repeat(4, 280px);
     grid-gap: 20px;
-    
+    padding-bottom: 100px;
   }
   @media only screen and (max-width: 767px){
     .products_row{
       grid-template-columns: repeat(2, 50%);
       grid-gap: 0;
+      grid-auto-rows: auto;
     }
   }
   @media only screen and (min-width: 767px) and (max-width: 1200px) {

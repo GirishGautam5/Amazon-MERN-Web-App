@@ -26,6 +26,7 @@
     width: 90%;
     flex: 0.7;
     justify-content: space-evenly;
+    padding-bottom: 10px;
 }
 .description > h5{
     font-size: 16px;

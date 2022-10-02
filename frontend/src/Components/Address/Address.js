@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useStateValue } from "../../ContextAPI/StateProvider";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
 import Navbar from "../Home/Navbar";
+import { useNavigate } from "react-router-dom";
 import "./styles.css";
 export default function Address() {
     const [{address}, dispatch] = useStateValue();
@@ -13,6 +14,7 @@ export default function Address() {
   const [landmark, setLandmark] = useState(address.landmark);
   const [city, setCity] = useState(address.city);
   const [state, setState] = useState(address.state);
+  const navigate = useNavigate();
   const deliveryAddress =(e)=>{
     e.preventDefault();
     dispatch({
@@ -28,6 +30,7 @@ export default function Address() {
             state,
         }
     })
+navigate("/payment")
   }
   return (
     <div className="Address_Container">
