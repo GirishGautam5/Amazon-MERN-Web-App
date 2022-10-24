@@ -4,7 +4,8 @@ import "./ProductCardstyles.css";
 import { useStateValue } from "../../ContextAPI/StateProvider";
 
 export default function ProductCard(props) {
-  const {id,image,title,price,rating} = props;
+  const {product} = props;
+  const {id,image,title,price,rating} = product;
   const [{basket}, dispatch] = useStateValue();
   console.log(basket,'basket')
   const addToCart=(e)=>{

@@ -28,9 +28,12 @@
     justify-content: space-evenly;
     padding-bottom: 10px;
 }
-.description > h5{
+.description > a> h5{
     font-size: 16px;
     font-weight: 600;
+}
+.description > a {
+    text-decoration: none;
 }
 .description > p{
     font-weight: 600;
