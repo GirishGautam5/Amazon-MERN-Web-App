@@ -1,36 +1,23 @@
 import React from "react";
 import Rating from "@material-ui/lab/Rating";
 import "./ProductCardstyles.css";
-import { useStateValue } from "../../ContextAPI/StateProvider";
+import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
-  const {product} = props;
-  const {id,image,title,price,rating} = product;
-  const [{basket}, dispatch] = useStateValue();
-  console.log(basket,'basket')
-  const addToCart=(e)=>{
-    e.preventDefault();
-    dispatch({
-      type: 'ADD_ITEM_TO_CART',
-      item: {
-        id,
-        title,
-        price,
-        image,
-        rating,
-      }
-    })
-  }
+  const { product } = props;
+  const { _id, image, title, price, rating } = product;
   return (
     <div className="product-card">
       <div className="product-image">
-        <img
-          src={image}
-          alt="phone"
-        />
+        <Link to={`/product/${_id}`}>
+          <img src={image} alt="phone" />
+        </Link>
       </div>
+
       <div className="description">
-        <h5>{title}</h5>
+        <Link to={`/product/${_id}`}>
+          <h5>{title}</h5>
+        </Link>
         <Rating
           name="half-rating-read"
           defaultValue={rating}
@@ -38,7 +25,7 @@ export default function ProductCard(props) {
           readOnly
         />
         <p>{price}</p>
-        <button onClick={addToCart}>Add to Cart</button>
+        {/* <button onClick={addToCart}>Add to Cart</button> */}
       </div>
     </div>
   );

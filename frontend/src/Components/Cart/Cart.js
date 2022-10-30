@@ -1,64 +1,112 @@
-import React from "react";
-import { useStateValue } from "../../ContextAPI/StateProvider";
+import React, { useEffect } from "react";
 import Navbar from "../Home/Navbar";
-import CurrencyFormat from "react-currency-format";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./styles.css";
-import { getTotalCartPrice } from "../../ContextAPI/Reducer";
+import { addToCart, removeFromCart } from "../../Redux/Actions/cartActions";
+import MessageBox from "../MessageBox/MessageBox";
 
 export default function Cart() {
+  const params = useParams();
+  const productId = params.id;
+  const { search } = useLocation();
+  const qtyInUrl = new URLSearchParams(search).get("qty");
+  const qty = qtyInUrl ? Number(qtyInUrl) : 1;
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   const navigate = useNavigate();
-  const [{ basket }, dispatch] = useStateValue();
-  console.log(basket, "basket");
-  const removeItem=(e,id)=>{
-    e.preventDefault();
-    dispatch({
-      type: 'REMOVE_ITEM_FROM_CART',
-      id: id,
-    })
-  }
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    navigate("/signin?redirect=shipping");
+  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (productId) {
+      dispatch(addToCart(productId, qty));
+    }
+  }, [dispatch, productId, qty]);
   return (
-    <div className="cart">
+    <div>
       <Navbar />
-      <div className="cart_body">
-        <div className="shopping_cart">
-          <h2>Shopping Cart</h2>
-          {basket?.map((item) => (
-            <div>
-            <div className="product">
-              <div className="product_img">
-                <img src={item.image} alt="product" className="product_image" />
-              </div>
-              <div className="product_description">
-                <h4>{item.title}</h4>
-                <p>{item.price}</p>
-                <button onClick={(e)=>removeItem(e,item.id)}>Remove</button>
-              </div>
-            </div>
-            <div className="seperator" />
-            </div>
-          ))}
+      <div className="row top">
+        <div className="col-2">
+          <h1>Shopping Cart</h1>
+          {cartItems.length === 0 ? (
+            <MessageBox>
+              Cart is empty. <Link to="/">Go Shopping</Link>
+            </MessageBox>
+          ) : (
+            <ul>
+              {cartItems.map((item) => (
+                <li key={item.product}>
+                  <div className="row">
+                    <div>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="small"
+                      ></img>
+                    </div>
+                    <div className="min-30">
+                      <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    </div>
+                    <div>
+                      <select
+                        value={item.qty}
+                        onChange={(e) =>
+                          dispatch(
+                            addToCart(item.product, Number(e.target.value))
+                          )
+                        }
+                      >
+                        {[...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <h4>₹{item.price}</h4>
+                    </div>
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => removeFromCartHandler(item.product)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="subtotal">
-          <CurrencyFormat
-            renderText={(value) => (
-              <>
-                <p>
-                  Subtotal ({basket?.length} items) : <strong>{value}</strong>
-                </p>
-                <small>
-                  <input type="checkbox" />
-                  <span>This order contains a gift.</span>
-                </small>
-              </>
-            )}
-            decimalScale={2}
-            value={getTotalCartPrice(basket)}
-            displayType="text"
-            thousandSeparator={true}
-            prefix={"₹"}
-          />
-          <button onClick={()=>navigate("/address")}>Proceed to Checkout</button>
+        <div className="col-1">
+          <div className="card card-body">
+            <ul>
+              <li>
+                <h2>
+                  Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) :
+                  ₹{cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                </h2>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={checkoutHandler}
+                  className="primary block"
+                  disabled={cartItems.length === 0}
+                >
+                  Proceed to Checkout
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

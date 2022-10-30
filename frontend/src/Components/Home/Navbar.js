@@ -3,10 +3,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbarstyles.css";
-import { useStateValue } from "../../ContextAPI/StateProvider";
+import { useSelector } from "react-redux";
 export default function Navbar() {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
   const navigate = useNavigate();
-  const [{basket}] = useStateValue()
   return (
     <div className="navbar">
       <div className="navContent">
@@ -28,9 +29,11 @@ export default function Navbar() {
             <span className="option-firstline">Returns</span>
             <span className="option-secondline">& Orders</span>
           </div>
-          <div className="navbar-basket" onClick={()=> navigate('/cart')}>
+          <div className="navbar-basket" onClick={() => navigate("/cart")}>
             <ShoppingBasketIcon className="option-secondline option-basket" />
-            <span className="option-secondline basket-count">{basket?.length}</span>
+            <span className="option-secondline basket-count">
+              {cartItems.length > 0 && cartItems.length}
+            </span>
           </div>
         </div>
       </div>

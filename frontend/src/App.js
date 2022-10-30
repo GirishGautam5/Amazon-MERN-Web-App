@@ -20,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/:id" element={<Cart />} />
           <Route path="/address" element={<Address />} />
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/placeorder" element={<OrderSummary />} />
