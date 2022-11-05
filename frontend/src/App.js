@@ -4,11 +4,11 @@ import "./App.css";
 import Address from "./Components/Address/Address";
 import Cart from "./Components/Cart/Cart";
 import Home from "./Components/Home/Home";
-import Login from "./Components/Login/Login";
 import OrderSummary from "./Components/OrderSummary/OrderSummary";
 import PaymentMethod from "./Components/PaymentMethod/PaymentMethod";
 import ProductScreen from "./Components/ProductScreen/ProductScreen";
 import Signup from "./Components/Signup/Signup";
+import SignIn from "./Components/Signin/SignIn";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/product/:id" element={<ProductScreen />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart/:id" element={<Cart />} />

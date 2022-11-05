@@ -87,6 +87,7 @@
   color: #ffffff;
   margin-left: 10px;
   margin-right: 10px;
+  cursor: pointer;
 }
 .option-firstline {
   font-size: 10px;

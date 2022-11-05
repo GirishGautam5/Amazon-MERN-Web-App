@@ -21,7 +21,7 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navbar-nav">
-          <div className="navbar-options">
+          <div className="navbar-options" onClick={() => navigate("/signin")}>
             <span className="option-firstline">Hello Guest</span>
             <span className="option-secondline">Sign In</span>
           </div>
@@ -32,7 +32,7 @@ export default function Navbar() {
           <div className="navbar-basket" onClick={() => navigate("/cart")}>
             <ShoppingBasketIcon className="option-secondline option-basket" />
             <span className="option-secondline basket-count">
-              {cartItems.length > 0 && cartItems.length}
+              {cartItems.length > 0 ? cartItems.length : 0}
             </span>
           </div>
         </div>
