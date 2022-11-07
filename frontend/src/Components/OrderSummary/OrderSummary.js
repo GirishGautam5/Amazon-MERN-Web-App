@@ -41,7 +41,7 @@ export default function OrderSummary() {
                 <img src={item.image} alt="product" className="product_image" />
               </div>
               <div className="product_description">
-                <h4>{item.title}</h4>
+                <h4>{item.name}</h4>
                 <p>{item.price}</p>
               </div>
             </div>

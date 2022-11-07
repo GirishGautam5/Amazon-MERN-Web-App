@@ -47,7 +47,7 @@ export default function ProductScreen(props) {
             <div className="product_col-1">
               <ul>
                 <li>
-                  <h1>{product.title}</h1>
+                  <h1>{product.name}</h1>
                 </li>
                 <li>
                   <Rating

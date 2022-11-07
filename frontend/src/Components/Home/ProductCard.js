@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard(props) {
   const { product } = props;
-  const { _id, image, title, price, rating } = product;
+  const { _id, image, name, price, rating } = product;
   return (
     <div className="product-card">
       <div className="product-image">
@@ -16,7 +16,7 @@ export default function ProductCard(props) {
 
       <div className="description">
         <Link to={`/product/${_id}`}>
-          <h5>{title}</h5>
+          <h5>{name}</h5>
         </Link>
         <Rating
           name="half-rating-read"
