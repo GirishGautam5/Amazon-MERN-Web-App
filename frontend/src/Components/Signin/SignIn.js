@@ -1,14 +1,31 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { signin } from "../../Redux/Actions/userActions";
+import LoadingBox from "../LoadingBox/LoadingBox";
+import MessageBox from "../MessageBox/MessageBox";
 import "./styles.css";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = userSignin;
+  const navigation = useRef(useNavigate());
+const { search } = useLocation();
+const searchSplit = search.split('=')[1];
+const redirect = search ? `/${searchSplit}`: '/';
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(signin(email, password));
     // TODO: sign in action
   };
+  useEffect(() => {
+    if (userInfo) {
+    navigation.current(redirect);
+    }
+    }, [userInfo, navigation, redirect])
   return (
     <div className="form-area">
       <div className="logo">
@@ -22,10 +39,10 @@ export default function SignIn() {
             <li>
               <h2>Sign-In</h2>
             </li>
-            {/* <li>
-          {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>}
-        </li> */}
+            <li>
+            {loading && <LoadingBox></LoadingBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
+            </li>
             <li>
               <label htmlFor="email">Email address</label>
               <input
@@ -49,10 +66,10 @@ export default function SignIn() {
                 Signin
               </button>
             </li>
-            <li>New to amazona?</li>
+            <li>New to amazon?</li>
             <li>
               <Link to="/signup" className="button secondary text-center">
-                Create your amazona account
+                Create your amazon account
               </Link>
             </li>
           </ul>

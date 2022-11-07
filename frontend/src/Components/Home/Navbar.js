@@ -3,11 +3,19 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link, useNavigate } from "react-router-dom";
 import "./navbarstyles.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../../Redux/Actions/userActions";
 export default function Navbar() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const signoutHandler = () => {
+    userInfo ? 
+    dispatch(signout()) : navigate("/signin");
+  };
   return (
     <div className="navbar">
       <div className="navContent">
@@ -21,9 +29,10 @@ export default function Navbar() {
           </div>
         </div>
         <div className="navbar-nav">
-          <div className="navbar-options" onClick={() => navigate("/signin")}>
-            <span className="option-firstline">Hello Guest</span>
-            <span className="option-secondline">Sign In</span>
+          
+          <div className="navbar-options" onClick={() =>{signoutHandler()} }>
+            <span className="option-firstline">{`${'Hello,'} ${userInfo ? userInfo.name : 'Guest'}`}</span>
+            <span className="option-secondline">{`${userInfo ? 'Sign Out' : 'Sign In'}`}</span>
           </div>
           <div className="navbar-options">
             <span className="option-firstline">Returns</span>
