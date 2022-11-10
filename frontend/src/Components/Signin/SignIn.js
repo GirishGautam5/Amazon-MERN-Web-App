@@ -13,9 +13,13 @@ export default function SignIn() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo, loading, error } = userSignin;
   const navigation = useRef(useNavigate());
+  let navigate = useNavigate();
+// const { search } = useLocation();
+// const searchSplit = search.split('=')[1];
+// const redirect = search ? searchSplit: '/';
 const { search } = useLocation();
-const searchSplit = search.split('=')[1];
-const redirect = search ? `/${searchSplit}`: '/';
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signin(email, password));
@@ -23,9 +27,14 @@ const redirect = search ? `/${searchSplit}`: '/';
   };
   useEffect(() => {
     if (userInfo) {
-    navigation.current(redirect);
+      navigate(redirect);
     }
-    }, [userInfo, navigation, redirect])
+    }, [navigate, redirect, userInfo])
+  // useEffect(() => {
+  //   if(userInfo){
+  //   navigate("/shipping")
+  //   }
+  //   }, [userInfo])
   return (
     <div className="form-area">
       <div className="logo">
@@ -68,9 +77,9 @@ const redirect = search ? `/${searchSplit}`: '/';
             </li>
             <li>New to amazon?</li>
             <li>
-              <Link to="/signup" className="button secondary text-center">
-                Create your amazon account
-              </Link>
+            <Link to={`/register?redirect=${redirect}`}>
+              Create your amazon account
+            </Link>
             </li>
           </ul>
         </form>

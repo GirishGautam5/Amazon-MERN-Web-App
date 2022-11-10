@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../ContextAPI/StateProvider";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
@@ -6,29 +7,29 @@ import Navbar from "../Home/Navbar";
 import "./styles.css";
 
 export default function PaymentMethod() {
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
-  const [{address}, dispath] = useStateValue();
-  console.log(address)
-  const navigate = useNavigate();
-  if(!address){
-    navigate("/address")
+  const cart = useSelector((state) => state.cart);
+  const  navigate = useNavigate();
+  const { shippingAddress } = cart;
+  if (!shippingAddress.address) {
+    navigate('/signin/shipping');
   }
-  const continuehandler=(e)=>{
-    e.preventDefault()
-    navigate('/placeorder')
-  }
+  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    //dispatch(savePaymentMethod(paymentMethod));
+    navigate('/placeorder');
+  };
   return (
-    <div className="payment_container">
-      <Navbar />
-      <CheckoutSteps step1 step2 step3 />
-      <div className="payment_body">
-        <div className="form_container">
-          <div className="input_container">
-            <div>
-            <h1>Payment Method</h1>
-            </div>
-           <div className="input_radio">
-           <input
+    <div className="payment">
+      <CheckoutSteps step1 step2 step3></CheckoutSteps>
+      <form className="paymentform" onSubmit={submitHandler}>
+        <div>
+          <h1>Payment Method</h1>
+        </div>
+        <div>
+          <div>
+            <input
               type="radio"
               id="paypal"
               value="PayPal"
@@ -38,24 +39,28 @@ export default function PaymentMethod() {
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
             <label htmlFor="paypal">PayPal</label>
-           </div>
-           <div className="input_radio">
-           <input
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
               type="radio"
               id="stripe"
               value="Stripe"
               name="paymentMethod"
               required
-              checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
             <label htmlFor="stripe">Stripe</label>
-           </div>
-           
           </div>
-          <button onClick={continuehandler}>Continue</button>
         </div>
-      </div>
+        <div>
+          <label />
+          <button className="primary" type="submit">
+            Continue
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -7,9 +7,10 @@
 }
 .Address_main {
   padding: 15px;
+  background-color: #fff;
 }
 .Form_Container {
-  border: 1px solid lightgray;
+  /* border: 1px solid lightgray; */
   width: 45%;
   /* min-width: 400px; */
   height: fit-content;
@@ -21,6 +22,9 @@
   background-color: #fff;
   margin: auto;
 }
+.Form_Container > h1 {
+  width: 100%
+}
 @media only screen and (max-width: 1200px) {
   .Form_Container {
     width: 80%;
@@ -28,8 +32,8 @@
 }
 .Form_Container > button {
   align-self: flex-start;
-  height: 33px;
-  width: 250px;
+  height: 40px;
+  width: 100%;
   margin-top: 20px;
   background-color: #ffa32a;
   border: none;

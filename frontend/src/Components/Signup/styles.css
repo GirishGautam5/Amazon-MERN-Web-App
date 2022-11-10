@@ -4,6 +4,7 @@
   align-items: center;
   height: 100%;
   flex-direction: column;
+  margin-bottom: 100px;
 }
 .Logo {
   margin-top: 20px;
@@ -39,6 +40,7 @@ img {
   width: 98%;
   border-radius: 5px;
   border: 1px solid lightgray;
+  font-size: 15px;
 }
 .Form-Container > form > input:focus {
   outline: none !important;
@@ -68,15 +70,16 @@ img {
   word-break: normal;
 }
 .signup-button {
-  height: 30px;
+  height: 35px;
   width: 100%;
   border-radius: 2px;
   border: 1px solid;
-  border-color: darkgray;
+ 
   margin-top: 10px;
   font-size: 12px;
+  background-color: #f0c040;
 }
-.signup-button:hover {
+/* .signup-button:hover {
   background-color: #dfdfdf;
   border: 1px solid gray;
-}
+} */

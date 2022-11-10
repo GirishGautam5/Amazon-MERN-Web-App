@@ -1,14 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./styles.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../Redux/Actions/userActions";
+import LoadingBox from "../LoadingBox/LoadingBox";
+import MessageBox from "../MessageBox/MessageBox";
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
-  const signInHandler = () => {
-    navigate("/signin");
+  const navigation = useRef(useNavigate());
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
+  const { search } = useLocation();
+const searchSplit = search.split('=')[1];
+const redirect = search ? searchSplit: '/';
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert('Password and confirm password are not match');
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
+  useEffect(() => {
+    if (userInfo) {
+    navigation.current(redirect);
+    }
+    }, [userInfo, navigation, redirect])
   return (
     <div className="Login">
       <Link to="/">
@@ -16,24 +38,36 @@ export default function Signup() {
       </Link>
       <div className="Form-Container">
         <h1>Create Account</h1>
-        <form>
+        {loading && <LoadingBox></LoadingBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <form onSubmit={submitHandler}>
           <p>Your Name</p>
           <input
             type="text"
             value={name}
+            required
             onChange={(e) => setName(e.target.value)}
           />
           <p>Email</p>
           <input
-            type="text"
+            type="email"
             value={email}
+            required
             onChange={(e) => setEmail(e.target.value)}
           />
           <p>Password</p>
           <input
             type="password"
             value={password}
+            required
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <p>Confirm Password</p>
+          <input
+            type="password"
+            value={confirmPassword}
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <button type="submit" className="signup-button">
             Create Account in Amazon
@@ -45,7 +79,7 @@ export default function Signup() {
         </p>
         <div>
           Already have an account?
-          <Link to="/signin" className="button secondary text-center">
+          <Link to={`/signin?redirect=${redirect}`} className="button secondary text-center">
             Sign In
           </Link>
         </div>

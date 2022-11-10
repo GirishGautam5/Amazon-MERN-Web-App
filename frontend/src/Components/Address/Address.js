@@ -4,32 +4,33 @@ import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
 import Navbar from "../Home/Navbar";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { saveShippingAddress } from "../../Redux/Actions/cartActions";
 export default function Address() {
-    const [{address}, dispatch] = useStateValue();
-  const [fullName, setFullName] = useState(address.fullName);
-  const [phone, setPhone] = useState(address.phone);
-  const [postalCode, setPostalCode] = useState(address.postalCode);
-  const [flat, setFlat] = useState(address.flat);
-  const [area, setArea] = useState(address.area);
-  const [landmark, setLandmark] = useState(address.landmark);
-  const [city, setCity] = useState(address.city);
-  const [state, setState] = useState(address.state);
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const { shippingAddress } = cart;
+  if (!userInfo) {
+    navigate('/signin');
+  }
+  const dispatch = useDispatch();
+   //const [{address}, dispatch] = useStateValue();
+  const [fullName, setFullName] = useState(shippingAddress.fullName);
+  const [phone, setPhone] = useState(shippingAddress.phone);
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+  const [flat, setFlat] = useState(shippingAddress.flat);
+  const [area, setArea] = useState(shippingAddress.area);
+  const [landmark, setLandmark] = useState(shippingAddress.landmark);
+  const [city, setCity] = useState(shippingAddress.city);
+  const [state, setState] = useState(shippingAddress.state);
+  
   const deliveryAddress =(e)=>{
     e.preventDefault();
-    dispatch({
-        type: 'ADD_ADDRESS',
-        item: {
-            fullName,
-            phone,
-            postalCode,
-            flat,
-            area,
-            landmark,
-            city,
-            state,
-        }
-    })
+    dispatch(
+      saveShippingAddress({ fullName, phone, postalCode,flat, area, landmark, city, state })
+    );
 navigate("/payment")
   }
   return (
@@ -37,7 +38,10 @@ navigate("/payment")
       <Navbar />
       <CheckoutSteps step1 step2 />
       <div className="Address_main">
-        <div className="Form_Container">
+        <form className="Form_Container" onSubmit={deliveryAddress}>
+      
+          <h1>Shipping Address</h1>
+      
           <div className="Input_Container">
             <p>Full Name</p>
             <input
@@ -45,6 +49,7 @@ navigate("/payment")
               placeholder="Enter full name"
               onChange={(e) => setFullName(e.target.value)}
               value={fullName}
+              required
             />
           </div>
           <div className="Input_Container">
@@ -54,6 +59,7 @@ navigate("/payment")
               placeholder="Enter Mobile Number"
               onChange={(e) => setPhone(e.target.value)}
               value={phone}
+              required
             />
           </div>
           <div className="Input_Container">
@@ -74,6 +80,7 @@ navigate("/payment")
               placeholder="Enter Flat/House no"
               onChange={(e) => setFlat(e.target.value)}
               value={flat}
+              required
             />
           </div>
           <div className="Input_Container">
@@ -83,6 +90,7 @@ navigate("/payment")
               placeholder="Enter Area/Street"
               onChange={(e) => setArea(e.target.value)}
               value={area}
+              required
             />
           </div>
           <div className="Input_Container">
@@ -101,19 +109,21 @@ navigate("/payment")
               placeholder="Enter city"
               onChange={(e) => setCity(e.target.value)}
               value={city}
+              required
             />
           </div>
-          <div className="Input_Container">
+          {/* <div className="Input_Container">
             <p>State</p>
             <input
               type="text"
               placeholder="Enter State"
               onChange={(e) => setState(e.target.value)}
               value={state}
+              required
             />
-          </div>
-          <button onClick={deliveryAddress}>Deliver to this Address</button>
-        </div>
+          </div> */}
+          <button type="submit">Deliver to this Address</button>
+        </form>
       </div>
     </div>
   );

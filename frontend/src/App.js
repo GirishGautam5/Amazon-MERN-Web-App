@@ -18,10 +18,10 @@ function App() {
           <Route path="/" element={<Home />} exact />
           <Route path="/product/:id" element={<ProductScreen />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/register" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart/:id" element={<Cart />} />
-          <Route path="/address" element={<Address />} />
+          <Route path="/signin/shipping" element={<Address />} />
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/placeorder" element={<OrderSummary />} />
         </Routes>
