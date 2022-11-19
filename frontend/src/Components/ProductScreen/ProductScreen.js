@@ -18,6 +18,7 @@ export default function ProductScreen(props) {
   //const product = products.find((p) => p._id === id);
   //const productId = props.match.params.id;
   const productDetails = useSelector((state) => state.productDetails);
+  console.log(productDetails,'productdetails')
   const { loading, error, product } = productDetails;
   useEffect(() => {
     dispatch(detailsProduct(id));

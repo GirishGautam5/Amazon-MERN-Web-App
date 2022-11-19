@@ -153,6 +153,9 @@ button {
 select {
   padding: 5px;
 }
+select:focus {
+  height: 30px;
+}
 button {
   background-color: #f8f8f8;
   cursor: pointer;

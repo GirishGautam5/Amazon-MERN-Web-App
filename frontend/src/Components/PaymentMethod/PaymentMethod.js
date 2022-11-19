@@ -1,27 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../ContextAPI/StateProvider";
+import { savePaymentMethod } from "../../Redux/Actions/cartActions";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
 import Navbar from "../Home/Navbar";
 import "./styles.css";
 
 export default function PaymentMethod() {
+  const [paymentMethod, setPaymentMethod] = useState('');
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   const  navigate = useNavigate();
   const { shippingAddress } = cart;
-  if (!shippingAddress.address) {
-    navigate('/signin/shipping');
-  }
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
-  const dispatch = useDispatch();
+  // if (!shippingAddress.address) {
+  //   navigate('/signin/shipping');
+  // }
   const submitHandler = (e) => {
     e.preventDefault();
-    //dispatch(savePaymentMethod(paymentMethod));
-    navigate('/placeorder');
+      dispatch(savePaymentMethod(paymentMethod))
+      navigate('/placeorder');
   };
+  // useEffect(()=>{
+  //   if(paymentMethod !== ''){
+  //     dispatch(savePaymentMethod(paymentMethod))
+  //     //navigate('/placeorder');
+  //   }
+  // },[])
   return (
     <div className="payment">
+      <Navbar />
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <form className="paymentform" onSubmit={submitHandler}>
         <div>
@@ -35,7 +43,6 @@ export default function PaymentMethod() {
               value="PayPal"
               name="paymentMethod"
               required
-              checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
             <label htmlFor="paypal">PayPal</label>
@@ -45,13 +52,39 @@ export default function PaymentMethod() {
           <div>
             <input
               type="radio"
-              id="stripe"
-              value="Stripe"
+              id="phonepay"
+              value="PhonePay"
               name="paymentMethod"
               required
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="stripe">Stripe</label>
+            <label htmlFor="phonepay">PhonePay</label>
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="radio"
+              id="gpay"
+              value="Google Pay"
+              name="paymentMethod"
+              required
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></input>
+            <label htmlFor="gpay">Google Pay</label>
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="radio"
+              id="cod"
+              value="Cash on Delivery"
+              name="paymentMethod"
+              required
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            ></input>
+            <label htmlFor="cod">Cash On Delivery</label>
           </div>
         </div>
         <div>

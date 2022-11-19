@@ -9,6 +9,7 @@ import PaymentMethod from "./Components/PaymentMethod/PaymentMethod";
 import ProductScreen from "./Components/ProductScreen/ProductScreen";
 import Signup from "./Components/Signup/Signup";
 import SignIn from "./Components/Signin/SignIn";
+import Successpage from "./Components/Success/Success";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signin/shipping" element={<Address />} />
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/placeorder" element={<OrderSummary />} />
+          <Route path="/success" element={<Successpage />} />
         </Routes>
       </div>
     </Router>

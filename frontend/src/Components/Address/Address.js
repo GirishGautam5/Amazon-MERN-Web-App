@@ -112,7 +112,7 @@ navigate("/payment")
               required
             />
           </div>
-          {/* <div className="Input_Container">
+          <div className="Input_Container">
             <p>State</p>
             <input
               type="text"
@@ -121,7 +121,7 @@ navigate("/payment")
               value={state}
               required
             />
-          </div> */}
+          </div>
           <button type="submit">Deliver to this Address</button>
         </form>
       </div>
