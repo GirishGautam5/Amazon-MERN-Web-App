@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useStateValue } from "../../ContextAPI/StateProvider";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
 import Navbar from "../Home/Navbar";
 import { useNavigate } from "react-router-dom";
@@ -13,10 +12,9 @@ export default function Address() {
   const navigate = useNavigate();
   const { shippingAddress } = cart;
   if (!userInfo) {
-    navigate('/signin');
+    navigate("/signin");
   }
   const dispatch = useDispatch();
-   //const [{address}, dispatch] = useStateValue();
   const [fullName, setFullName] = useState(shippingAddress.fullName);
   const [phone, setPhone] = useState(shippingAddress.phone);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
@@ -25,23 +23,31 @@ export default function Address() {
   const [landmark, setLandmark] = useState(shippingAddress.landmark);
   const [city, setCity] = useState(shippingAddress.city);
   const [state, setState] = useState(shippingAddress.state);
-  
-  const deliveryAddress =(e)=>{
+
+  const deliveryAddress = (e) => {
     e.preventDefault();
     dispatch(
-      saveShippingAddress({ fullName, phone, postalCode,flat, area, landmark, city, state })
+      saveShippingAddress({
+        fullName,
+        phone,
+        postalCode,
+        flat,
+        area,
+        landmark,
+        city,
+        state,
+      })
     );
-navigate("/payment")
-  }
+    navigate("/payment");
+  };
   return (
     <div className="Address_Container">
       <Navbar />
       <CheckoutSteps step1 step2 />
       <div className="Address_main">
         <form className="Form_Container" onSubmit={deliveryAddress}>
-      
           <h1>Shipping Address</h1>
-      
+
           <div className="Input_Container">
             <p>Full Name</p>
             <input
@@ -65,13 +71,13 @@ navigate("/payment")
           <div className="Input_Container">
             <p>Pincode</p>
             <input
-            type="text"
-            id="postalCode"
-            placeholder="Enter postal code"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-            required
-          ></input>
+              type="text"
+              id="postalCode"
+              placeholder="Enter postal code"
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+              required
+            ></input>
           </div>
           <div className="Input_Container">
             <p>Flat, House no. Building, Company</p>

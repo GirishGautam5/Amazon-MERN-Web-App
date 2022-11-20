@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useStateValue } from "../../ContextAPI/StateProvider";
 import { savePaymentMethod } from "../../Redux/Actions/cartActions";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
 import Navbar from "../Home/Navbar";
 import "./styles.css";
 
 export default function PaymentMethod() {
-  const [paymentMethod, setPaymentMethod] = useState('');
-  const cart = useSelector((state) => state.cart);
+  const [paymentMethod, setPaymentMethod] = useState("");
   const dispatch = useDispatch();
-  const  navigate = useNavigate();
-  const { shippingAddress } = cart;
+  const navigate = useNavigate();
   // if (!shippingAddress.address) {
   //   navigate('/signin/shipping');
   // }
   const submitHandler = (e) => {
     e.preventDefault();
-      dispatch(savePaymentMethod(paymentMethod))
-      navigate('/placeorder');
+    dispatch(savePaymentMethod(paymentMethod));
+    navigate("/placeorder");
   };
   // useEffect(()=>{
   //   if(paymentMethod !== ''){

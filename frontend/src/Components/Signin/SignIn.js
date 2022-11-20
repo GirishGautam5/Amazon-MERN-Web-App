@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signin } from "../../Redux/Actions/userActions";
@@ -12,14 +12,13 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo, loading, error } = userSignin;
-  const navigation = useRef(useNavigate());
   let navigate = useNavigate();
-// const { search } = useLocation();
-// const searchSplit = search.split('=')[1];
-// const redirect = search ? searchSplit: '/';
-const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
+  // const { search } = useLocation();
+  // const searchSplit = search.split('=')[1];
+  // const redirect = search ? searchSplit: '/';
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signin(email, password));
@@ -29,7 +28,7 @@ const { search } = useLocation();
     if (userInfo) {
       navigate(redirect);
     }
-    }, [navigate, redirect, userInfo])
+  }, [navigate, redirect, userInfo]);
   // useEffect(() => {
   //   if(userInfo){
   //   navigate("/shipping")
@@ -49,8 +48,8 @@ const { search } = useLocation();
               <h2>Sign-In</h2>
             </li>
             <li>
-            {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+              {loading && <LoadingBox></LoadingBox>}
+              {error && <MessageBox variant="danger">{error}</MessageBox>}
             </li>
             <li>
               <label htmlFor="email">Email address</label>
@@ -77,9 +76,9 @@ const { search } = useLocation();
             </li>
             <li>New to amazon?</li>
             <li>
-            <Link to={`/register?redirect=${redirect}`}>
-              Create your amazon account
-            </Link>
+              <Link to={`/register?redirect=${redirect}`}>
+                Create your amazon account
+              </Link>
             </li>
           </ul>
         </form>

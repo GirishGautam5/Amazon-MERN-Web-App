@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import ProductCard from "./ProductCard";
 import "./homestyles.css";
-import Footer from "../Footer/Footer";
 import LoadingBox from "../LoadingBox/LoadingBox";
 import MessageBox from "../MessageBox/MessageBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,7 +39,6 @@ export default function Home() {
           </div>
         </>
       )}
-      {/* <Footer /> */}
     </div>
   );
 }

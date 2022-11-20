@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { useStateValue } from "../../ContextAPI/StateProvider";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
-import CurrencyFormat from "react-currency-format";
 import Navbar from "../Home/Navbar";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,7 +13,7 @@ export default function OrderSummary() {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
-  const toPrice = (num) => Number(num.toFixed(2)); 
+  const toPrice = (num) => Number(num.toFixed(2));
   cart.itemsPrice = toPrice(
     cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
   );
@@ -23,14 +21,14 @@ export default function OrderSummary() {
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice;
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const placeOrderHandler = () => {
     // TODO: dispatch place order action
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
   };
   useEffect(() => {
     if (success) {
-      navigate('/success');
+      navigate("/success");
       dispatch({ type: ORDER_CREATE_RESET });
     }
   }, [dispatch, navigate, order, success]);
@@ -60,66 +58,77 @@ export default function OrderSummary() {
             <p>{cart.paymentMethod}</p>
           </div>
           <div className="order_items">
-          <h5>Your Order</h5>
-          <div>
-          {cart.cartItems?.map((item) => (
+            <h5>Your Order</h5>
             <div>
-            <div className="product">
-              <div className="product_img">
-                <img src={item.image} alt="product" className="product_image" />
-              </div>
-              <div className="product_description">
-              <div className="min-30">
-                          <Link to={`/product/${item.product}`}>
+              {cart.cartItems?.map((item) => (
+                <div>
+                  <div className="product">
+                    <div className="product_img">
+                      <img
+                        src={item.image}
+                        alt="product"
+                        className="product_image"
+                      />
+                    </div>
+                    <div className="product_description">
+                      <div className="min-30">
+                        <Link to={`/product/${item.product}`}>
                           <h3 className="name-span">{item.name}</h3>
-                          </Link>
-                        </div>
-                <p> {item.qty} x ₹{item.price} = ₹{item.qty * item.price}</p>
-                <p>{item.description}</p>
-              </div>
+                        </Link>
+                      </div>
+                      <p>
+                        {" "}
+                        {item.qty} x ₹{item.price} = ₹{item.qty * item.price}
+                      </p>
+                      <p>{item.description}</p>
+                    </div>
+                  </div>
+                  <div className="seperator" />
+                </div>
+              ))}
             </div>
-            <div className="seperator" />
-            </div>
-          ))}
-          </div>
           </div>
         </div>
         <div className="order_summary">
-            <ul>
-                <li>
-                <h2>Order Summary</h2>
-                </li>
-                <li>
-                    <div className="row">
-                        <p>Items:</p>
-                       <div>₹{cart.itemsPrice.toFixed(2)}</div>
-                    </div>
-                </li>
-                <li>
-                  <div className="row">
-                    <p>Delivery</p>
-                    <p>₹{cart.shippingPrice.toFixed(2)}</p>
-                  </div>
-                </li>
-                <li>
-                  <div className="seperator_line" />
-                </li>
-                <li>
-                  <div className="row">
-                    <strong>Order Total</strong>
-                    <strong>₹{cart.totalPrice.toFixed(2)}</strong>
-                  </div>
-                </li>
-                <li className="button_li">
-              <button  onClick={placeOrderHandler} disabled={cart.cartItems.length === 0}>Place Order</button>
-                </li>
-                <li>
-                {loading && <LoadingBox></LoadingBox>}
+          <ul>
+            <li>
+              <h2>Order Summary</h2>
+            </li>
+            <li>
+              <div className="row">
+                <p>Items:</p>
+                <div>₹{cart.itemsPrice.toFixed(2)}</div>
+              </div>
+            </li>
+            <li>
+              <div className="row">
+                <p>Delivery</p>
+                <p>₹{cart.shippingPrice.toFixed(2)}</p>
+              </div>
+            </li>
+            <li>
+              <div className="seperator_line" />
+            </li>
+            <li>
+              <div className="row">
+                <strong>Order Total</strong>
+                <strong>₹{cart.totalPrice.toFixed(2)}</strong>
+              </div>
+            </li>
+            <li className="button_li">
+              <button
+                onClick={placeOrderHandler}
+                disabled={cart.cartItems.length === 0}
+              >
+                Place Order
+              </button>
+            </li>
+            <li>
+              {loading && <LoadingBox></LoadingBox>}
               {error && <MessageBox variant="danger">{error}</MessageBox>}
-                </li>
-  
-            </ul>
-            {/* <ul>
+            </li>
+          </ul>
+          {/* <ul>
                 <li>
                 <h2>Order Summary</h2>
                 </li>

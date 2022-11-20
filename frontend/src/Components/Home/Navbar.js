@@ -1,7 +1,6 @@
 import React from "react";
-import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbarstyles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../Redux/Actions/userActions";
@@ -16,8 +15,7 @@ export default function Navbar(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const signoutHandler = () => {
-    userInfo ? 
-    dispatch(signout()) : navigate("/signin");
+    userInfo ? dispatch(signout()) : navigate("/signin");
   };
   return (
     <div className="navbar">
@@ -25,20 +23,31 @@ export default function Navbar(props) {
         <Link to="/" className="">
           <img src={amazon} className="navbar-logo" alt="amazon" />
         </Link>
-       
-          <SearchBox />
-         
+
+        <SearchBox />
+
         <div className="navbar-nav">
-          
-          <div className="navbar-options" onClick={() =>{signoutHandler()} }>
-            <span className="option-firstline">{`${'Hello,'} ${userInfo ? userInfo.name : 'Guest'}`}</span>
-            <span className="option-secondline">{`${userInfo ? 'Sign Out' : 'Sign In'}`}</span>
+          <div
+            className="navbar-options"
+            onClick={() => {
+              signoutHandler();
+            }}
+          >
+            <span className="option-firstline">{`${"Hello,"} ${
+              userInfo ? userInfo.name : "Guest"
+            }`}</span>
+            <span className="option-secondline">{`${
+              userInfo ? "Sign Out" : "Sign In"
+            }`}</span>
           </div>
-          <div className="navbar-options" onClick={() => {navigate('/orderhistory')}}>
-           
+          <div
+            className="navbar-options"
+            onClick={() => {
+              navigate("/orderhistory");
+            }}
+          >
             <span className="option-firstline">Returns</span>
             <span className="option-secondline">& Orders</span>
-           
           </div>
           <div className="navbar-basket" onClick={() => navigate("/cart")}>
             <ShoppingBasketIcon className="option-secondline option-basket" />
@@ -51,7 +60,6 @@ export default function Navbar(props) {
       <div>
         <SearchBoxMobile />
       </div>
-
     </div>
   );
 }

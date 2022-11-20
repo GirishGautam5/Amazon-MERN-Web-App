@@ -16,9 +16,9 @@ export default function ProductScreen(props) {
   //const product = products.find((p) => p._id === id);
   //const productId = props.match.params.id;
   const productDetails = useSelector((state) => state.productDetails);
-  console.log(productDetails,'productdetails')
+  console.log(productDetails, "productdetails");
   const { loading, error, product } = productDetails;
-  console.log(product,'product')
+  console.log(product, "product");
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [dispatch, id]);
@@ -57,16 +57,22 @@ export default function ProductScreen(props) {
                     readOnly
                   />
                 </li>
-                <li><span className="brand"> Price: </span> ₹{product?.price}</li>
                 <li>
-                 <span className="brand"> Brand: </span> {product?.brand}
+                  <span className="brand"> Price: </span> ₹{product?.price}
                 </li>
                 <li>
-                <span className="brand"> Model Name: </span>{product?.ModelName}
+                  <span className="brand"> Brand: </span> {product?.brand}
                 </li>
-                {product?.OS &&<li>
-                <span className="brand"> OS: </span>{product?.OS}
-                </li>}
+                <li>
+                  <span className="brand"> Model Name: </span>
+                  {product?.ModelName}
+                </li>
+                {product?.OS && (
+                  <li>
+                    <span className="brand"> OS: </span>
+                    {product?.OS}
+                  </li>
+                )}
               </ul>
             </div>
             <div className="product_col-3">

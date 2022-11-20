@@ -24,7 +24,9 @@ export default function ProductCard(props) {
           precision={0.5}
           readOnly
         />
-        <p><span>₹</span> {price}</p>
+        <p>
+          <span>₹</span> {price}
+        </p>
         <span className="save-emi">Save extra with no cost emi</span>
         {/* <button onClick={addToCart}>Add to Cart</button> */}
       </div>

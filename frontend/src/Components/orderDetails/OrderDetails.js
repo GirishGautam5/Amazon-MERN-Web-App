@@ -1,23 +1,13 @@
 import React, { useEffect } from "react";
-import { useStateValue } from "../../ContextAPI/StateProvider";
-import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
-import CurrencyFormat from "react-currency-format";
 import Navbar from "../Home/Navbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getTotalCartPrice } from "../../ContextAPI/Reducer";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder, detailsOrder } from "../../Redux/Actions/orderActions";
-import { ORDER_CREATE_RESET } from "../../Redux/Constants/orderConstants";
-import LoadingBox from "../LoadingBox/LoadingBox";
-import MessageBox from "../MessageBox/MessageBox";
+import { detailsOrder } from "../../Redux/Actions/orderActions";
 import "./orderDetailsstyles.css";
 
 export default function OrderDetails() {
   const { id } = useParams();
-  console.log(id, "orderid");
   const orderDetails = useSelector((state) => state.orderDetails);
-  console.log(orderDetails.order, "orderDetails");
-  const { order, loading, error } = orderDetails;
   const cart = useSelector((state) => state.cart);
   const toPrice = (num) => Number(num.toFixed(2));
   cart.itemsPrice = toPrice(
@@ -77,7 +67,6 @@ export default function OrderDetails() {
           </div>
         </div>
         <div className="order_Details_items">
-       
           <div>
             {orderDetails?.order?.orderItems?.map((item) => (
               <div>
@@ -106,7 +95,7 @@ export default function OrderDetails() {
                         navigate(`/product/${item.product}`);
                       }}
                     >
-                     <span className="order_span"> Buy it Again</span>
+                      <span className="order_span"> Buy it Again</span>
                     </button>
                   </div>
                 </div>

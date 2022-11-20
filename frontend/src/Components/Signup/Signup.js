@@ -9,28 +9,27 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigation = useRef(useNavigate());
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
   const { search } = useLocation();
-const searchSplit = search.split('=')[1];
-const redirect = search ? searchSplit: '/';
+  const searchSplit = search.split("=")[1];
+  const redirect = search ? searchSplit : "/";
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert('Password and confirm password are not match');
+      alert("Password and confirm password are not match");
     } else {
       dispatch(register(name, email, password));
     }
   };
   useEffect(() => {
     if (userInfo) {
-    navigation.current(redirect);
+      navigation.current(redirect);
     }
-    }, [userInfo, navigation, redirect])
+  }, [userInfo, navigation, redirect]);
   return (
     <div className="Login">
       <Link to="/">
@@ -79,7 +78,10 @@ const redirect = search ? searchSplit: '/';
         </p>
         <div>
           Already have an account?
-          <Link to={`/signin?redirect=${redirect}`} className="button secondary text-center">
+          <Link
+            to={`/signin?redirect=${redirect}`}
+            className="button secondary text-center"
+          >
             Sign In
           </Link>
         </div>
