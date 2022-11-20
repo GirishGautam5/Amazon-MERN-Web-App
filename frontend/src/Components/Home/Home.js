@@ -14,7 +14,7 @@ export default function Home() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listProducts());
+    dispatch(listProducts({}));
   }, [dispatch]);
   return (
     <div className="home">

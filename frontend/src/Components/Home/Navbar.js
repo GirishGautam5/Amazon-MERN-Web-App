@@ -1,10 +1,12 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./navbarstyles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../Redux/Actions/userActions";
+import SearchBox from "../Search/SearchBox";
+import SearchBoxMobile from "../Search/SearchBoxMobile";
 export default function Navbar() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -22,12 +24,9 @@ export default function Navbar() {
         <Link to="/" className="">
           <img src="./amazon_logo1.png" className="navbar-logo" alt="amazon" />
         </Link>
-        <div className="navbar-search">
-          <input type="text" className="search-input" />
-          <div className="search">
-            <SearchIcon className="search-icon" />
-          </div>
-        </div>
+       
+          <SearchBox />
+         
         <div className="navbar-nav">
           
           <div className="navbar-options" onClick={() =>{signoutHandler()} }>
@@ -48,12 +47,10 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      <div className="navbar-mobilesearch">
-        <input type="text" className="search-input" />
-        <div className="search">
-          <SearchIcon className="search-icon" />
-        </div>
+      <div>
+        <SearchBoxMobile />
       </div>
+
     </div>
   );
 }

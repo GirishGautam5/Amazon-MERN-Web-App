@@ -12,6 +12,7 @@ import SignIn from "./Components/Signin/SignIn";
 import Successpage from "./Components/Success/Success";
 import OrderHistoryScreen from "./Components/OrderHistory/OrderHistory";
 import OrderDetails from "./Components/orderDetails/OrderDetails";
+import SearchScreen from "./Components/Search/SearchScreen";
 
 function App() {
   return (
@@ -30,6 +31,12 @@ function App() {
           <Route path="/success" element={<Successpage />} />
           <Route path="/orderhistory" element={<OrderHistoryScreen />} />
           <Route path="/order/:id" element={<OrderDetails />}></Route>
+           <Route path="/search/name" element={<SearchScreen />} exact></Route>
+            <Route
+              path="/search/name/:name"
+              element={<SearchScreen />}
+              exact
+            ></Route>
         </Routes>
       </div>
     </Router>
