@@ -5,7 +5,6 @@ import CurrencyFormat from "react-currency-format";
 import Navbar from "../Home/Navbar";
 import "./styles.css";
 import { Link, useNavigate } from "react-router-dom";
-import { getTotalCartPrice } from "../../ContextAPI/Reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../Redux/Actions/orderActions";
 import { ORDER_CREATE_RESET } from "../../Redux/Constants/orderConstants";
@@ -108,7 +107,7 @@ export default function OrderSummary() {
                 <li>
                   <div className="row">
                     <strong>Order Total</strong>
-                    <strong>${cart.totalPrice.toFixed(2)}</strong>
+                    <strong>₹{cart.totalPrice.toFixed(2)}</strong>
                   </div>
                 </li>
                 <li className="button_li">

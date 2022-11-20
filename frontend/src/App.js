@@ -10,6 +10,8 @@ import ProductScreen from "./Components/ProductScreen/ProductScreen";
 import Signup from "./Components/Signup/Signup";
 import SignIn from "./Components/Signin/SignIn";
 import Successpage from "./Components/Success/Success";
+import OrderHistoryScreen from "./Components/OrderHistory/OrderHistory";
+import OrderDetails from "./Components/orderDetails/OrderDetails";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/placeorder" element={<OrderSummary />} />
           <Route path="/success" element={<Successpage />} />
+          <Route path="/orderhistory" element={<OrderHistoryScreen />} />
+          <Route path="/order/:id" element={<OrderDetails />}></Route>
         </Routes>
       </div>
     </Router>

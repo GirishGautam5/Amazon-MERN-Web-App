@@ -38,6 +38,11 @@
   padding-bottom: 15px;
   padding-top: 5px;
 }
+@media only screen and (max-width: 600px){
+  .product{
+    flex-direction: column;
+  }
+}
 .seperator {
   border-bottom: 1px solid lightgray;
 }
@@ -123,9 +128,9 @@
   flex: 2 1 50rem;
   margin-left: 15px;
 }
-.min-30 {
+/* .min-30 {
   min-width: 30rem;
-}
+} */
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;

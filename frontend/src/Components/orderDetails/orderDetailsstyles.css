@@ -1,0 +1,111 @@
+.order_Details_container {
+    width: 100%;
+}
+.orderDetails{
+     display: flex;
+    padding: 15px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.order_Details_items{
+    background-color:  rgb(234, 237, 237);
+    width: 60%;
+    border-radius: 10px;
+    border: 1px #D5D9D9 solid;
+    padding: 20px;
+    margin-top: 10px;
+}
+.order_again {
+    color: #0F1111;
+    background-color: #FFD814;
+    border-color: #FCD200;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+.order_again:hover {
+    border-color: #FCD200;
+}
+.order_Details_product {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.orderView{
+  justify-content: space-around;
+    background-color:  rgb(234, 237, 237);
+    padding: 20px;
+    width: 60%;
+    border-radius: 10px;
+    border: 1px #D5D9D9 solid;
+}
+@media only screen and (max-width:1400px) {
+    .order_Details_product{
+        flex-direction: column;
+    }
+}
+@media only screen and (min-width:700px) {
+    .orderView{
+        display: flex;
+     
+     justify-content: space-around;
+       background-color:  rgb(234, 237, 237);
+       padding: 20px;
+       width: 60%;
+   }
+}
+.order_Address_container{
+    margin-top: 20px;
+    flex: 0.3;
+}
+.order_Address_container >div{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.order_Address_container >p{
+    /* font-size: 14px; */
+    margin-top: 0;
+}
+.order_payment{
+    margin-top: 20px;
+    flex:0.3;
+}
+/* .order_summary{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  } */
+  @media only screen and (max-width:1200px){
+    .orderdetails_summary{
+     
+      margin-left: 0px;
+    }
+  }
+  .orderdetails_summary>ul{
+  
+        padding: 0;
+      
+        list-style-type: none;
+  }
+  /* .orderdetails_summary> ul> li{
+    margin-top: 1rem;
+  } */
+  .orderdetails_summary> ul> li>h2{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  .orderdetails_summary> ul> li> div>p{
+    margin-top:0px;
+    margin-bottom: 0px;
+  }
+  .orderdetails_summary{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    flex:0.4;
+  }
+  .order_span {
+    font-size: 20px;
+  }

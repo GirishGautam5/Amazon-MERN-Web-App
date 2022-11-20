@@ -34,9 +34,11 @@ export default function Navbar() {
             <span className="option-firstline">{`${'Hello,'} ${userInfo ? userInfo.name : 'Guest'}`}</span>
             <span className="option-secondline">{`${userInfo ? 'Sign Out' : 'Sign In'}`}</span>
           </div>
-          <div className="navbar-options">
+          <div className="navbar-options" onClick={() => {navigate('/orderhistory')}}>
+           
             <span className="option-firstline">Returns</span>
             <span className="option-secondline">& Orders</span>
+           
           </div>
           <div className="navbar-basket" onClick={() => navigate("/cart")}>
             <ShoppingBasketIcon className="option-secondline option-basket" />
