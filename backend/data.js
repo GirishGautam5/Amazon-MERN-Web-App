@@ -28,7 +28,7 @@ const data = {
     },
     {
       image: "https://m.media-amazon.com/images/I/413u56t+CiL._AC_SY200_.jpg",
-      name: "One plus Nord",
+      name: "One plus Nord CE 2 Lite 5G(Blue Tide, 6GB RAM,128GB storage)",
       price: 18000,
       rating: 4.5,
       countInStock: 0,

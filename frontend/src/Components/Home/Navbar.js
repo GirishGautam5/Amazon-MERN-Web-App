@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../../Redux/Actions/userActions";
 import SearchBox from "../Search/SearchBox";
 import SearchBoxMobile from "../Search/SearchBoxMobile";
-export default function Navbar() {
+const amazon = require("./amazon_logo1.png");
+export default function Navbar(props) {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const userSignin = useSelector((state) => state.userSignin);
@@ -22,7 +23,7 @@ export default function Navbar() {
     <div className="navbar">
       <div className="navContent">
         <Link to="/" className="">
-          <img src="./amazon_logo1.png" className="navbar-logo" alt="amazon" />
+          <img src={amazon} className="navbar-logo" alt="amazon" />
         </Link>
        
           <SearchBox />

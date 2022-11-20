@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../Home/Navbar';
 import './successstyles.css'
 
 function Successpage(props){
@@ -8,8 +9,9 @@ function Successpage(props){
         navigate("/");
       }
     return(
+      <div>
+         <Navbar />
       <div className="success-screen">
-        <button className="btnhome" onClick={handlesubmit}>Go to Homepage</button>
 <div className="card">
       <div className="tick" >
         <i className="checkmark">✓</i>
@@ -18,7 +20,8 @@ function Successpage(props){
         <p className="pclass">We received your purchase request;<br/> we'll be in touch shortly!</p>
 
       </div>  
-      </div>  )
+      </div> 
+      </div> )
 }
 
 export default Successpage;

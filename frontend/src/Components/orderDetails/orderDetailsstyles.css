@@ -9,7 +9,7 @@
     flex-direction: column;
 }
 .order_Details_items{
-    background-color:  rgb(234, 237, 237);
+    /* background-color:  rgb(234, 237, 237); */
     width: 60%;
     border-radius: 10px;
     border: 1px #D5D9D9 solid;

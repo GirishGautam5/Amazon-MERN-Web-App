@@ -71,7 +71,7 @@ export default function OrderSummary() {
               <div className="product_description">
               <div className="min-30">
                           <Link to={`/product/${item.product}`}>
-                            {item.name}
+                          <h3 className="name-span">{item.name}</h3>
                           </Link>
                         </div>
                 <p> {item.qty} x ₹{item.price} = ₹{item.qty * item.price}</p>

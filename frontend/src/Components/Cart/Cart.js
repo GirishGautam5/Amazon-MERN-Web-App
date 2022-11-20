@@ -29,7 +29,7 @@ export default function Cart() {
     }
   }, [dispatch, productId, qty]);
   return (
-    <div>
+    <div className="cart">
       <Navbar />
       <div className="row top">
         <div className="col-2">

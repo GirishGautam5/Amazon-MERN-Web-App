@@ -127,6 +127,7 @@
 .col-2 {
   flex: 2 1 50rem;
   margin-left: 15px;
+  margin-bottom: 100px;
 }
 /* .min-30 {
   min-width: 30rem;

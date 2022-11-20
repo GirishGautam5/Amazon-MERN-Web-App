@@ -16,7 +16,7 @@ export default function ProductCard(props) {
 
       <div className="description">
         <Link to={`/product/${_id}`}>
-          <h5>{name}</h5>
+          <h3>{name}</h3>
         </Link>
         <Rating
           name="half-rating-read"
@@ -24,7 +24,8 @@ export default function ProductCard(props) {
           precision={0.5}
           readOnly
         />
-        <p>{price}</p>
+        <p><span>₹</span> {price}</p>
+        <span className="save-emi">Save extra with no cost emi</span>
         {/* <button onClick={addToCart}>Add to Cart</button> */}
       </div>
     </div>

@@ -13,13 +13,12 @@ export default function ProductScreen(props) {
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
   const { id } = useParams();
-  //console.log(id,'id')
-  console.log(useParams(), "useparams");
   //const product = products.find((p) => p._id === id);
   //const productId = props.match.params.id;
   const productDetails = useSelector((state) => state.productDetails);
   console.log(productDetails,'productdetails')
   const { loading, error, product } = productDetails;
+  console.log(product,'product')
   useEffect(() => {
     dispatch(detailsProduct(id));
   }, [dispatch, id]);
@@ -28,7 +27,7 @@ export default function ProductScreen(props) {
     navigate(`/cart/${id}?qty=${qty}`);
   };
   return (
-    <div>
+    <div className="product-screen">
       <Navbar />
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -48,21 +47,26 @@ export default function ProductScreen(props) {
             <div className="product_col-1">
               <ul>
                 <li>
-                  <h1>{product.name}</h1>
+                  <h1>{product?.name}</h1>
                 </li>
                 <li>
                   <Rating
                     name="half-rating-read"
-                    defaultValue={product.rating}
+                    defaultValue={product?.rating}
                     precision={0.5}
                     readOnly
                   />
                 </li>
-                <li>Price : ${product.price}</li>
+                <li><span className="brand"> Price: </span> ₹{product?.price}</li>
                 <li>
-                  Description:
-                  <p>{product.description}</p>
+                 <span className="brand"> Brand: </span> {product?.brand}
                 </li>
+                <li>
+                <span className="brand"> Model Name: </span>{product?.ModelName}
+                </li>
+                {product?.OS &&<li>
+                <span className="brand"> OS: </span>{product?.OS}
+                </li>}
               </ul>
             </div>
             <div className="product_col-3">
@@ -71,7 +75,7 @@ export default function ProductScreen(props) {
                   <li>
                     <div className="product_row_body">
                       <div>Price</div>
-                      <div className="price">&#x20B9;{product.price}</div>
+                      <div className="price">&#x20B9;{product?.price}</div>
                     </div>
                   </li>
                   <li>

@@ -38,7 +38,7 @@ a {
   border-radius: 0.5rem;
 }
 .product_col-1 {
-  /* flex: 1 1; */
+  flex: 1 1;
   padding-left: 15px;
 }
 .product_col-3 {
@@ -131,4 +131,10 @@ select:hover,
 textarea:hover,
 button:hover {
   border: 0.1rem #404040 solid;
+}
+.brand{
+  color: #0F1111;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
 }
