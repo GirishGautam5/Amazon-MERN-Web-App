@@ -13,14 +13,14 @@ export default function Signup() {
   const navigation = useRef(useNavigate());
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
-  // const { search } = useLocation();
-  // const searchSplit = search.split("=")[1];
-  // const redirect = search ? searchSplit : "/";
-  const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
-  console.log(redirectInUrl,'searchsplit')
+  const searchSplit = search.split("=")[1];
+  const redirect = search ? searchSplit : "/";
+  const navigate = useNavigate();
+  // const { search } = useLocation();
+  // const redirectInUrl = new URLSearchParams(search).get('redirect');
+  // const redirect = redirectInUrl ? redirectInUrl : '/';
+  // console.log(redirectInUrl,'searchsplit')
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -32,9 +32,9 @@ export default function Signup() {
   };
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      navigate('/signin/shipping');
     }
-  }, [userInfo, navigation, redirect]);
+  }, [navigate, redirect, userInfo]);
   return (
     <div className="Login">
       <Link to="/">
