@@ -158,6 +158,7 @@ button {
 }
 select {
   padding: 5px;
+  font-size: 15px;
 }
 select:focus {
   height: 30px;

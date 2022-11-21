@@ -22,11 +22,9 @@ export default function OrderHistoryScreen(props) {
         <h1>Your Orders</h1>
         {loading ? (
           <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
         ) : (
           <>
-            {orders?.length === 0 && (
+            {!orders?.length > 0 && (
               <h4>0 orders. You have not placed any orders</h4>
             )}
             {orders?.length > 0 && (
