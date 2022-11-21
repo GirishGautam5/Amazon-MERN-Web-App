@@ -26,10 +26,11 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart/:id" element={<Cart />} />
           <Route path="/signin/shipping" element={<Address />} />
+          {/* <Route path="/register/shipping" element={<Address />} /> */}
           <Route path="/payment" element={<PaymentMethod />} />
           <Route path="/placeorder" element={<OrderSummary />} />
           <Route path="/success" element={<Successpage />} />
-          <Route path="/orderhistory" element={<OrderHistoryScreen />} />
+          <Route path="/signin/orderhistory" element={<OrderHistoryScreen />} />
           <Route path="/order/:id" element={<OrderDetails />}></Route>
            <Route path="/search/name" element={<SearchScreen />} exact></Route>
             <Route

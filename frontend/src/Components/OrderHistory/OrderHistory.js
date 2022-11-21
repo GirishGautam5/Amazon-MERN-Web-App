@@ -10,7 +10,12 @@ import "./orderHistorystyles.css";
 export default function OrderHistoryScreen(props) {
   const orderMineList = useSelector((state) => state.orderMineList);
   const { loading, error, orders } = orderMineList;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const navigate = useNavigate();
+  if (!userInfo) {
+    navigate("/signin");
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listOrderMine());

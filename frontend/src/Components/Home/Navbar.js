@@ -43,7 +43,7 @@ export default function Navbar(props) {
           <div
             className="navbar-options"
             onClick={() => {
-              navigate("/orderhistory");
+              navigate("/signin?redirect=orderhistory");
             }}
           >
             <span className="option-firstline">Returns</span>

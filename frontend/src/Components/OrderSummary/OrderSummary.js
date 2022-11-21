@@ -13,6 +13,12 @@ export default function OrderSummary() {
   const cart = useSelector((state) => state.cart);
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const navigate = useNavigate();
+  if (!userInfo) {
+    navigate("/signin");
+  }
   const toPrice = (num) => Number(num.toFixed(2));
   cart.itemsPrice = toPrice(
     cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0)
@@ -21,7 +27,6 @@ export default function OrderSummary() {
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const placeOrderHandler = () => {
     // TODO: dispatch place order action
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));

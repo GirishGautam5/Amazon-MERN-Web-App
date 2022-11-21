@@ -6,17 +6,22 @@ import { register } from "../../Redux/Actions/userActions";
 import LoadingBox from "../LoadingBox/LoadingBox";
 import MessageBox from "../MessageBox/MessageBox";
 export default function Signup() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { search } = useLocation();
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
   const navigation = useRef(useNavigate());
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
-  const { search } = useLocation();
-  const searchSplit = search.split("=")[1];
-  const redirect = search ? searchSplit : "/";
-  const navigate = useNavigate();
+  // const { search } = useLocation();
+  // const searchSplit = search.split("=")[1];
+  // const redirect = search ? searchSplit : "/";
+  // const navigate = useNavigate();
   // const { search } = useLocation();
   // const redirectInUrl = new URLSearchParams(search).get('redirect');
   // const redirect = redirectInUrl ? redirectInUrl : '/';
@@ -25,16 +30,19 @@ export default function Signup() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Password and confirm password are not match");
+      alert('Password and confirm password are not match');
     } else {
+     
+        navigate("/")
+ 
       dispatch(register(name, email, password));
     }
   };
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/signin/shipping');
-    }
-  }, [navigate, redirect, userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate(redirect);
+  //   }
+  // }, [navigate, redirect, userInfo]);
   return (
     <div className="Login">
       <Link to="/">

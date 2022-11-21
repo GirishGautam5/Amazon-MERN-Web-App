@@ -7,6 +7,12 @@ import "./orderDetailsstyles.css";
 
 export default function OrderDetails() {
   const { id } = useParams();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const navigate = useNavigate();
+  if (!userInfo) {
+    navigate("/signin");
+  }
   const orderDetails = useSelector((state) => state.orderDetails);
   const cart = useSelector((state) => state.cart);
   const toPrice = (num) => Number(num.toFixed(2));
@@ -17,7 +23,6 @@ export default function OrderDetails() {
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(detailsOrder(id));

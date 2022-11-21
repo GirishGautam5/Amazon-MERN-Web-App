@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../../Redux/Actions/cartActions";
 import CheckoutSteps from "../CheckoutSteps/CheckoutSteps";
@@ -9,7 +9,12 @@ import "./styles.css";
 export default function PaymentMethod() {
   const [paymentMethod, setPaymentMethod] = useState("");
   const dispatch = useDispatch();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const navigate = useNavigate();
+  if (!userInfo) {
+    navigate("/signin");
+  }
   // if (!shippingAddress.address) {
   //   navigate('/signin/shipping');
   // }
