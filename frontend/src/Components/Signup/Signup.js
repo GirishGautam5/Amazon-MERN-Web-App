@@ -13,9 +13,14 @@ export default function Signup() {
   const navigation = useRef(useNavigate());
   const userRegister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userRegister;
+  // const { search } = useLocation();
+  // const searchSplit = search.split("=")[1];
+  // const redirect = search ? searchSplit : "/";
+  const navigate = useNavigate();
   const { search } = useLocation();
-  const searchSplit = search.split("=")[1];
-  const redirect = search ? searchSplit : "/";
+  const redirectInUrl = new URLSearchParams(search).get('redirect');
+  const redirect = redirectInUrl ? redirectInUrl : '/';
+  console.log(redirectInUrl,'searchsplit')
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
@@ -27,7 +32,7 @@ export default function Signup() {
   };
   useEffect(() => {
     if (userInfo) {
-      navigation.current(redirect);
+      navigate(redirect);
     }
   }, [userInfo, navigation, redirect]);
   return (
